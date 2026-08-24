@@ -1,0 +1,225 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f6fa;
+  color: #222;
+}
+
+.topbar {
+  background: #7b1e1e;
+  color: white;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar h1 {
+  font-size: 22px;
+}
+
+.topbar p {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.topbar button {
+  background: white;
+  color: #7b1e1e;
+}
+
+.menu {
+  display: flex;
+  gap: 8px;
+  padding: 10px;
+  background: white;
+  overflow-x: auto;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px #0001;
+}
+
+.menu button {
+  background: #f1f1f1;
+  white-space: nowrap;
+}
+
+main {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+h2 {
+  margin-bottom: 18px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px #00000012;
+}
+
+.card span {
+  font-size: 28px;
+}
+
+.card h3 {
+  margin: 8px 0;
+  font-size: 15px;
+  color: #666;
+}
+
+.card strong {
+  font-size: 24px;
+}
+
+.form-box {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #00000012;
+}
+
+.form-box input,
+.form-box select,
+.bill-total input {
+  width: 100%;
+  padding: 12px;
+  margin: 7px 0 13px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.form-box label,
+.bill-total label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.primary {
+  background: #7b1e1e;
+  color: white;
+}
+
+.success {
+  background: #188038;
+  color: white;
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+}
+
+.table-box {
+  background: white;
+  border-radius: 14px;
+  padding: 10px;
+  overflow-x: auto;
+  box-shadow: 0 3px 12px #00000012;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+th {
+  background: #fafafa;
+}
+
+.delete-btn {
+  background: #d93025;
+  color: white;
+  padding: 7px 10px;
+}
+
+.bill-total {
+  background: white;
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px #00000012;
+}
+
+.bill-total h3 {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 700px) {
+
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .topbar h1 {
+    font-size: 18px;
+  }
+
+  .topbar button {
+    padding: 8px;
+  }
+
+  main {
+    padding: 12px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .card strong {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
