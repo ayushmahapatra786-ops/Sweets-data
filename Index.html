@@ -1,1 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Sweet Shop Manager</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div>
+      <h1>🍬 Sweet Shop Manager</h1>
+      <p>Sales • Customers • Sweets • Bills</p>
+    </div>
+
+    <button onclick="showPage('dashboard')">🏠 Dashboard</button>
+  </header>
+
+
+  <nav class="menu">
+    <button onclick="showPage('dashboard')">🏠 Home</button>
+    <button onclick="showPage('billing')">🧾 New Bill</button>
+    <button onclick="showPage('sweets')">🍬 Sweets</button>
+    <button onclick="showPage('customers')">👤 Customers</button>
+    <button onclick="showPage('reports')">📊 Reports</button>
+  </nav>
+
+
+  <main>
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboard" class="page active">
+
+      <h2>Dashboard</h2>
+
+      <div class="cards">
+
+        <div class="card">
+          <span>💰</span>
+          <h3>Today's Sale</h3>
+          <strong id="todaySale">₹0</strong>
+        </div>
+
+        <div class="card">
+          <span>🧾</span>
+          <h3>Total Bills</h3>
+          <strong id="totalBills">0</strong>
+        </div>
+
+        <div class="card">
+          <span>👤</span>
+          <h3>Customers</h3>
+          <strong id="totalCustomers">0</strong>
+        </div>
+
+        <div class="card">
+          <span>🍬</span>
+          <h3>Sweet Items</h3>
+          <strong id="totalSweets">0</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- BILLING -->
+
+    <section id="billing" class="page">
+
+      <h2>🧾 New Bill</h2>
+
+      <div class="form-box">
+
+        <label>Customer</label>
+
+        <select id="billCustomer">
+          <option value="">Walk-in Customer</option>
+        </select>
+
+        <label>Sweet</label>
+
+        <select id="billSweet">
+          <option value="">Select Sweet</option>
+        </select>
+
+        <label>Quantity</label>
+
+        <input
+          type="number"
+          id="billQty"
+          placeholder="Quantity"
+          min="0"
+          step="0.001"
+        >
+
+        <label>Price</label>
+
+        <input
+          type="number"
+          id="billPrice"
+          placeholder="Price"
+        >
+
+        <button class="primary" onclick="addBillItem()">
+          ➕ Add Item
+        </button>
+
+      </div>
+
+
+      <div class="table-box">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Sweet</th>
+              <th>Qty</th>
+              <th>Rate</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody id="billItems"></tbody>
+
+        </table>
+
+      </div>
+
+
+      <div class="bill-total">
+
+        <h3>Total: ₹<span id="billTotal">0</span></h3>
+
+        <label>Paid Amount</label>
+
+        <input
+          type="number"
+          id="paidAmount"
+          value="0"
+          oninput="calculateDue()"
+        >
+
+        <h3>
+          Due:
+          ₹<span id="dueAmount">0</span>
+        </h3>
+
+        <button class="success" onclick="saveBill()">
+          💾 Save Bill
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- SWEETS -->
+
+    <section id="sweets" class="page">
+
+      <h2>🍬 Sweet Items</h2>
+
+      <div class="form-box">
+
+        <input
+          id="sweetName"
+          placeholder="Sweet name"
+        >
+
+        <input
+          id="sweetCategory"
+          placeholder="Category"
+        >
+
+        <input
+          type="number"
+          id="sweetPrice"
+          placeholder="Price per kg"
+        >
+
+        <input
+          type="number"
+          id="sweetStock"
+          placeholder="Stock (kg)"
+        >
+
+        <button class="primary" onclick="saveSweet()">
+          💾 Save Sweet
+        </button>
+
+      </div>
+
+
+      <div class="table-box">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>₹/KG</th>
+              <th>Stock</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="sweetList"></tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- CUSTOMERS -->
+
+    <section id="customers" class="page">
+
+      <h2>👤 Customers</h2>
+
+      <div class="form-box">
+
+        <input
+          id="customerName"
+          placeholder="Customer name"
+        >
+
+        <input
+          id="customerPhone"
+          placeholder="Mobile number"
+        >
+
+        <input
+          id="customerAddress"
+          placeholder="Address"
+        >
+
+        <button class="primary" onclick="saveCustomer()">
+          💾 Save Customer
+        </button>
+
+      </div>
+
+
+      <div class="table-box">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Mobile</th>
+              <th>Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody id="customerList"></tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- REPORTS -->
+
+    <section id="reports" class="page">
+
+      <h2>📊 Reports</h2>
+
+      <div class="cards">
+
+        <div class="card">
+          <h3>Total Sales</h3>
+          <strong id="reportSales">₹0</strong>
+        </div>
+
+        <div class="card">
+          <h3>Total Bills</h3>
+          <strong id="reportBills">0</strong>
+        </div>
+
+        <div class="card">
+          <h3>Total Due</h3>
+          <strong id="reportDue">₹0</strong>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
